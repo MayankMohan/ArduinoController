@@ -10,12 +10,10 @@ const int numButtonBytes = 1;
 const int totalBytes = numJoyAxes + numHandAxes + numButtonBytes;
 
 // Pins used to send interrupt signal to slaves.
-// TODO - Set these to correct interrupt pins.
 int interruptControllerPin = 4;
 int interruptHandPin = 5;
 
 // Serial port for controller.
-// TODO - Set to correct pins.
 SoftwareSerial controllerPort(2, 1);
 // Serial port for glove.
 SoftwareSerial handPort(3, 1);
