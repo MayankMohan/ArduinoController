@@ -13,6 +13,9 @@ byte packet[numAx + (numBtn > 0)];
 
 void setup() {
   pinMode(interrupt, INPUT);
+  for(int i = 0; i < numBtn; i++) {
+    pinMode(btn[i], INPUT_PULLUP);
+  }
   Serial.begin(9600);
   for(int i = 0; i < numAx; i++){
     amin[i] = analogRead(axis[i]);

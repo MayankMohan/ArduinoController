@@ -21,6 +21,7 @@ int screenRefreshMillis = 250;
 
 void setup() {
   pinMode(interrupt, INPUT);
+  pinMode(reCal, INPUT_PULLUP);
   
   lcd.begin(16, 2);
 
@@ -35,7 +36,7 @@ void setup() {
     amax[i] = amin[i];
   }
   attachInterrupt(digitalPinToInterrupt(interrupt), sendData, RISING);
-  attachInterrupt(digitalPinToInterrupt(reCal),calibrate, RISING);
+  // attachInterrupt(digitalPinToInterrupt(reCal),calibrate, FALLING);
 
   baseTime = millis();
   
@@ -59,7 +60,7 @@ void loop() {
 
   // If enough time has elapsed, refresh LCD screen.
   if(millis() - baseTime > screenRefreshMillis) {
-    printFlexValues();
+    //printFlexValues();
     baseTime = millis();
   }
   
