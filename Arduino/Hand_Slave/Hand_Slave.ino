@@ -6,7 +6,7 @@ const int numAx = 5;
 const int axis[numAx] = {0, 1, 2, 3, 4}; // Analog axis pins
 const bool inv[numAx] = {false, false, false, false, false};
 // LCD constants.
-const int rs = 8, en = 9, d4 = 10, d5 = 11, d6 = 12, d7 = 13;
+const int rs = 13, en = 12, d4 = 11, d5 = 10, d6 = 9, d7 = 8;
 
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
@@ -23,6 +23,10 @@ void setup() {
   pinMode(interrupt, INPUT);
   
   lcd.begin(16, 2);
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Hello");
   
   Serial.begin(9600);
   for(int i = 0; i < numAx; i++){
@@ -77,7 +81,8 @@ void printFlexValues() {
   // Clear screen.
   lcd.clear();
   lcd.setCursor(0, 0);
-
+  lcd.print("HI :)");
+/*
   // Print flex values.
   for(int i = 0; i < numAx; i++) {
     int r = i / 4;
@@ -85,4 +90,5 @@ void printFlexValues() {
     lcd.setCursor(r, c);
     lcd.print(packet[i]);
   }
+  */
 }

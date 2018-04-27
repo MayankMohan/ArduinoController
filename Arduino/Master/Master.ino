@@ -25,7 +25,8 @@ byte packet[totalBytes];
 void setup() {
   // Open USB serial and wait for port to open.
   Serial.begin(9600);
-  while(!Serial) {
+  
+  while(!Serial.available()) {
     // Waiting for serial port to connect.
   }
 
