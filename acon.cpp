@@ -8,10 +8,14 @@
 int main(){
 	using namespace std;
 	
-	printf("Hello World\n");
-	printf("Test compilation with vjoy libraries\n");
+	char name[20];
 	
-	HANDLE comm = CreateFile("COM7", GENERIC_WRITE | GENERIC_READ, 0, NULL, OPEN_EXISTING, 0, NULL);
+	printf("Enter Communications port name (eg. COM7): ");
+	scanf("%s", name);
+	
+	printf("Attempting to open a serial connection on port name: %s\n", name);
+	
+	HANDLE comm = CreateFile(name, GENERIC_WRITE | GENERIC_READ, 0, NULL, OPEN_EXISTING, 0, NULL);
 	DCB opt;
 	
 	//Get the current settings for the serial connection
@@ -74,14 +78,19 @@ int main(){
 	
 	do{
 		WaitCommEvent(comm, &commStat, 0);
-		ReadFile(comm, &in, 3, &bytesRead, 0);
-		if(bytesRead != 3){
+		ReadFile(comm, &in, 8, &bytesRead, 0);
+		if(bytesRead != 8){
 			CloseHandle(comm);
 			return 1;
 		}
 		iReport.wAxisX = (long)in[0];
 		iReport.wAxisY = (long)in[1];
-		iReport.lButtons = (long)in[2];
+		iReport.wAxisZ = (long)in[2];
+		iReport.wAxisXRot = (long)in[3];
+		iReport.wAxisYRot = (long)in[4];
+		iReport.wAxisZRot = (long)in[5];
+		iReport.wSlider = (long)in[6];
+		iReport.lButtons = (long)in[7];
 		//printf("(%d, %d)  -  %d\n", in[0], in[1], in[2]);
 		//printf("%ld\n", (LONG)in);
 		UpdateVJD(iInterface, &iReport);
