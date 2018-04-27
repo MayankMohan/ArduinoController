@@ -14,9 +14,9 @@ int interruptControllerPin = 4;
 int interruptHandPin = 5;
 
 // Serial port for controller.
-SoftwareSerial controllerPort(2, 1);
+SoftwareSerial controllerPort(2, 7);
 // Serial port for glove.
-SoftwareSerial handPort(3, 1);
+SoftwareSerial handPort(3, 6);
 
 // Array of bytes that will be sent to VJoy.
 // Bytes order for data: [joystick axes][hand axes][button bytes].
@@ -65,9 +65,9 @@ void pullControllerData() {
 
 void pullHandData() {
   // Signal hand to send data. (1 millisecond delay should be more than enough time to detect interrupt)
-  digitalWrite(interruptControllerPin, HIGH);
+  digitalWrite(interruptHandPin, HIGH);
   delay(1);
-  digitalWrite(interruptControllerPin, LOW);
+  digitalWrite(interruptHandPin, LOW);
   
   // Listen to hand data.
   handPort.listen();
