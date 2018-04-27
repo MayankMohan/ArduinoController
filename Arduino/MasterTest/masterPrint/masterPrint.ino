@@ -81,23 +81,30 @@ void pullControllerData() {
   digitalWrite(interruptControllerPin, LOW);
   
   // Put controller data into packet.
-  Serial.print("Controller: (");
+  //Serial.print("Controller: (");
+
+  packet[0] = controllerPort.read();
+  packet[1] = controllerPort.read();
+  packet[7] = controllerPort.read();
+  
+  /*
   for(int i = 0; controllerPort.available() > 0 && i < (numJoyAxes + numButtonBytes) ; i++) {
     int inInt = controllerPort.read();
     if(inInt == -1) {
       digitalWrite(led1, HIGH);
     }
     byte inByte = (byte)inInt;
-    Serial.print("  ");
-    Serial.print(inByte);
-    Serial.print("  ");
+    //Serial.print("  ");
+    //Serial.print(inByte);
+    //Serial.print("  ");
     if(i < numJoyAxes) {
       packet[i] = inByte;
     } else {
       packet[(numJoyAxes + numHandAxes) + (i - numJoyAxes)] = inByte;
     }
-  }
-  Serial.println(")");
+    
+  }*/
+  //Serial.println(")");
   
 }
 
@@ -110,7 +117,7 @@ void pullHandData() {
   delay(1);
   digitalWrite(interruptHandPin, LOW);
 
-  Serial.print("Hand: (");
+  //Serial.print("Hand: (");
   // Put hand data into packet.
   for(int i = numJoyAxes; handPort.available() > 0 && i < (numHandAxes + numJoyAxes); i++) {
      int inInt = handPort.read();
@@ -118,12 +125,12 @@ void pullHandData() {
       digitalWrite(led2, HIGH);
     }
     byte inByte = inInt;
-    Serial.print("  ");
-    Serial.print(inByte);
-    Serial.print("  ");
+    //Serial.print("  ");
+    //Serial.print(inByte);
+    //Serial.print("  ");
     packet[i] = inByte;
   }
 
-  Serial.println(")");
+  //Serial.println(")");
 }
 
