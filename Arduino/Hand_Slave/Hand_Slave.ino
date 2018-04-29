@@ -1,7 +1,7 @@
 #include <LiquidCrystal.h>
 
 const int interrupt = 2; //Interrupt Pin to send Data Packet
-const int reCal = 3; //Interrupt Pin for recalibration
+const int reCal = 4; //Interrupt Pin for recalibration
 const int numAx = 5;
 const int axis[numAx] = {0, 1, 2, 3, 4}; // Analog axis pins
 const bool inv[numAx] = {false, false, false, false, false};
@@ -36,7 +36,7 @@ void setup() {
     amax[i] = amin[i];
   }
   attachInterrupt(digitalPinToInterrupt(interrupt), sendData, RISING);
-  // attachInterrupt(digitalPinToInterrupt(reCal),calibrate, FALLING);
+  attachInterrupt(digitalPinToInterrupt(reCal),calibrate, FALLING);
 
   baseTime = millis();
   

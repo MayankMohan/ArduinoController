@@ -1,4 +1,5 @@
 #include <SoftwareSerial.h>
+const int LED[3] = {12, 10, 11};
 
 const int numAnalog[2] = {2, 5};
 const int numBtn[2] = {3, 0};
@@ -16,6 +17,11 @@ const int packSize = 8;
 byte packet[packSize];
 
 void setup() {
+  for(int i = 0; i < 3; i++){
+    pinMode(LED[i], OUTPUT);
+    digitalWrite(LED[i], LOW);
+  }
+  
   for(int i = 0; i < 2; i++){
     pinMode(interrupt[i], OUTPUT);
     ports[i].begin(9600);
@@ -35,6 +41,7 @@ void loop() {
   for(int i = 0; i < 2; i++){
     ports[i].listen();
     digitalWrite(interrupt[i], HIGH);
+    digitalWrite(LED[i], HIGH);
     
     while(ports[i].available() < numAnalog[i]); //Wait for the data to arrive
     
@@ -47,8 +54,11 @@ void loop() {
       packet[packSize - 1] = ports[i].read();
     }
     digitalWrite(interrupt[i], LOW);
+    digitalWrite(LED[i], LOW);
   }
 
+  digitalWrite(LED[2], HIGH);
   Serial.write(packet, packSize);
+  digitalWrite(LED[2], LOW);
   delay(50);
 }

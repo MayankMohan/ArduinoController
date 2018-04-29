@@ -3,7 +3,7 @@ const int numBtn = 3; //Number of Buttons
 
 const int btn[numBtn] = {4, 5, 6}; //Button Pins
 const int interrupt = 2; //Interrupt Pin to send Data Packet
-const int axis[numAx] = {0, 1}; // Analog axis pins
+const int axis[numAx] = {1, 0}; // Analog axis pins
 const bool inv[numAx] = {false, false};
 
 int amin[numAx];
