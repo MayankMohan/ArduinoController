@@ -10,3 +10,4 @@ arduino is the code in the COMTEST_MASTER folder. The glove code is in Hand_Slav
 and the Controller code is in Controller_Slave.
 
 The Project writeup is also included in this repository
+The Project video can be found at https://www.youtube.com/watch?v=dwh_X7khPA4
